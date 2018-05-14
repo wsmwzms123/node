@@ -1,5 +1,5 @@
 ## mk-dirs
-> a little function of creating multi level directories or files
+> a little tool function of creating multi level directories or files
 
 ## Usage
 ```js
