@@ -2,11 +2,11 @@ const path = require('path')
 const fs = require('fs')
 
 /**
- * 
- * 
+ *
+ *
  * @param {String} paths of creating files or folders
  * @param {Array|String} contents of files you creating
- * @param {Function} callback 
+ * @param {Function} callback
  */
 function mkdirs (paths, contentsArr, callback) {
   if (!paths || typeof paths !== 'string') return
@@ -21,9 +21,10 @@ function mkdirs (paths, contentsArr, callback) {
   const {base, dir, ext} = path.parse(paths)
   const dirnameArr = dir.split(/\\|\//)
   let dirname = ''
+  /* eslint-disable handle-callback-err */
   function mk (err) {
     if (dirnameArr.length) {
-      let arrShift, currentPath = ''
+      let arrShift; let currentPath = ''
       while (/^\.{1,2}$/.test(arrShift = dirnameArr.shift())) {
         currentPath += (arrShift + '/')
       }
@@ -34,7 +35,7 @@ function mkdirs (paths, contentsArr, callback) {
           mk(err)
         })
       } else {
-        fs.mkdir(dirname, mk.bind)
+        fs.mkdir(dirname, mk)
       }
     } else {
       if (ext) {
